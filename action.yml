@@ -1,0 +1,10 @@
+name: "Beau's Github Action Test"
+description: "Do not use in production thanks :)"
+
+branding:
+  icon: "database"
+  color: "purple"
+  
+runs:
+ using: "docker"
+ image: "DockerFile"
