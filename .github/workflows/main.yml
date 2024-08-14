@@ -13,10 +13,10 @@ jobs:
 
     services:
       surrealdb:
-        image: surrealdb/surrealdb:latest
+        image: surrealdb/surrealdb:v1.5.4
         ports:
           - 8000:8000
-        options: --user root --pass root
+        options: start --user root --pass root
 
     name: Run Action
     steps:
