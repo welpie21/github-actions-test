@@ -18,3 +18,23 @@ jobs:
 
       - name: Use Action
         uses: ./
+        
+      - name: Start SurrealDB
+        uses: surrealdb/setup-surreal@v1
+        with:
+          surrealdb_version: latest
+          surrealdb_port: 8000
+          surrealdb_username: root
+          surrealdb_password: root
+          surrealdb_auth: true
+          surrealdb_strict: true
+          surrealdb_log: debug
+          surrealdb_additional_args: --strict-mode --other-arg
+      - name: Try to retrieve response from port 8000
+        run: bash -c 'echo -n "Waiting port 8000 .."; for _ in `seq 1 40`; do echo -n .; sleep 0.25; nc -z localhost 8000 && echo " Open." && exit ; done; echo " Timeout!" >&2; exit 1'
+      
+      - name: Sleep 1 second
+        run: sleep 1
+      
+      - name: Execute version in docker
+        run: curl http://localhost:8000/version
