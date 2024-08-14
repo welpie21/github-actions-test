@@ -25,6 +25,6 @@ jobs:
 
       - name: Use Action
         uses: ./
-
+      
       - name: Try to retrieve response from port 8000
-        run: bash -c 'echo -n "Waiting port 8000 .."; for _ in `seq 1 40`; do echo -n .; sleep 0.5; nc -z 127.0.0.1 8000 && echo " Open." && exit ; done; echo " Timeout!" >&2; exit 1'
+        run: ping -c 5 surrealdb
