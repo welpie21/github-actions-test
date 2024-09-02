@@ -36,16 +36,15 @@ inputs:
     required: false
   
 runs:
- using: "docker"
- image: "surrealdb/surrealdb:${{ inputs.surrealdb_version }}"
- args:
-   - |
-    surrealdb start \
-      -p ${{ inputs.surrealdb_port }} \
-      --user ${{ inputs.surrealdb_username }} \
-      --pass ${{ inputs.surrealdb_password }} \
-      ${{ inputs.surrealdb_auth == 'true' && "--auth" || "" }} \
-      ${{ inputs.surrealdb_strict == 'true' && "--strict" || "" }} \
-      ${{ inputs.surrealdb_log == 'true' && "--log" || "" }} \
-      ${{ inputs.surrealdb_log == 'true' && nputs.surrealdb_log || "" }} \
-      ${{ inputs.surrealdb_additional_args }}
+  using: docker
+  image: "surrealdb/surrealdb:${{ inputs.surrealdb_version }}"
+  entrypoint: "./entrypoint.sh"
+  args:
+  - ${{ inputs.surrealdb_version }}
+  - ${{ inputs.surrealdb_port }}
+  - ${{ inputs.surrealdb_username }}
+  - ${{ inputs.surrealdb_password }}
+  - ${{ inputs.surrealdb_auth }}
+  - ${{ inputs.surrealdb_strict }}
+  - ${{ inputs.surrealdb_log }}
+  - ${{ inputs.surrealdb_additional_args }}
