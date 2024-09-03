@@ -51,6 +51,6 @@ runs:
       shell: sh
       run: |
         chmod +x entrypoint.sh
-        sh -c ./entrypoint.sh ${{ inputs.surrealdb_version }} ${{ inputs.surrealdb_port }} ${{ inputs.surrealdb_username }} ${{ inputs.surrealdb_password }} ${{ inputs.surrealdb_auth }} ${{ inputs.surrealdb_strict }} ${{ inputs.surrealdb_log }} ${{ inputs.surrealdb_additional_args }}
+        sh ./entrypoint.sh ${{ inputs.surrealdb_version }} ${{ inputs.surrealdb_port }} ${{ inputs.surrealdb_username }} ${{ inputs.surrealdb_password }} ${{ inputs.surrealdb_auth }} ${{ inputs.surrealdb_strict }} ${{ inputs.surrealdb_log }} ${{ inputs.surrealdb_additional_args }}
 
         
