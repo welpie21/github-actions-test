@@ -11,13 +11,6 @@ jobs:
   surrealdb-setup:
     runs-on: ubuntu-latest
 
-    services:
-      surrealdb:
-        image: surrealdb/surrealdb:v1.5.4
-        ports:
-          - 8000:8000
-        options: start --user root --pass root
-
     name: Run Action
     steps:
       - name: Checkout
