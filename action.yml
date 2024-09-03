@@ -50,7 +50,7 @@ runs:
     - name: Run SurrealDB
       shell: sh
       run: |
-        chmox +x entrypoint.sh
+        chmod +x entrypoint.sh
         sh -c ./entrypoint.sh \
           ${{ inputs.surrealdb_version }} \
           ${{ inputs.surrealdb_port }} \
