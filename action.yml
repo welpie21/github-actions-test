@@ -37,7 +37,7 @@ inputs:
   
 runs:
   using: docker
-  image: "surrealdb/surrealdb:${{ inputs.surrealdb_version }}"
+  image: surrealdb/surrealdb:${{ inputs.surrealdb_version }}
   entrypoint: "./entrypoint.sh"
   args:
   - ${{ inputs.surrealdb_version }}
