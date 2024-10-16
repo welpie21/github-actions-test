@@ -11,5 +11,6 @@ jobs:
   publish:
     name: Publish To Marketplace
     uses: github-actions-publish/publish-action@v1
+    needs: [ci]
     with:
       tag: v1
