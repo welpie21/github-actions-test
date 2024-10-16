@@ -7,10 +7,4 @@ on:
 jobs:
   ci:
     name: CI Job
-    uses: "./.github/workflows/ci.yml"
-  publish:
-    name: Publish To Marketplace
-    uses: github-actions-publish/publish-action@v1
-    needs: [ci]
-    with:
-      tag: v1
+    uses: ./.github/workflows/ci.yml
