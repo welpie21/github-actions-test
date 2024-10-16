@@ -1,4 +1,4 @@
-name: Run Action
+name: CI
 
 on:
   workflow_dispatch:

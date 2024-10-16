@@ -1,4 +1,4 @@
-name: Publish Action
+name: Publish
 
 on: 
   release: 
