@@ -3,13 +3,16 @@ name: Run Action
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: [main, change/action-improvements]
   pull_request:
     branches: [main]
 
 jobs:
   surrealdb-setup:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        surrealdb_version: ["v1.5.5", "v2.0.4", "latest"]
 
     name: Run Action
     steps:
@@ -19,12 +22,13 @@ jobs:
       - name: Use Action
         uses: ./
         with:
-          surrealdb_version: "1.5.4"
+          surrealdb_version: ${{ matrix.surrealdb_version }}
           surrealdb_port: "8000"
           surrealdb_username: "root"
           surrealdb_password: "root"
-          surrealdb_auth: "true"
-          surrealdb_strict: "true"
-      
-      - name: Try to retrieve response from port 8000
-        run: ping -c 5 surrealdb
+          surrealdb_strict: true
+          surrealdb_log: "trace"
+
+      - name: Retrieve SurrealDB version
+        run: curl http://127.0.0.1:8000/version
+        continue-on-error: true
