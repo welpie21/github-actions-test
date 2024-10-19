@@ -4,15 +4,16 @@ on:
   workflow_dispatch:
     inputs:
       TAG_VERSION:
-        description: 'Version of the tag'
+        description: Version of the tag
         required: true
       RELEASE_MESSAGE:
-        description: 'Message for the release'
+        description: Message for the release
         required: false
       RELEASE_TYPE:
-        description: 'Type of the release'
+        description: Type of the release
         required: false
         type: choice
+        default: release
         options:
           - draft
           - release
