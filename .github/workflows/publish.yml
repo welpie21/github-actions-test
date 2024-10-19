@@ -29,10 +29,12 @@ jobs:
       contents: write
     steps:
       - name: Create a release
-        uses: actions/create-release@v1
+        uses: ncipollo/release-action@v1
         with:
-          tag_name: ${{ env.TAG_VERSION }}
-          release_name: Release ${{ env.TAG_VERSION }}
+          tag: ${{ env.TAG_VERSION }}
+          name: ${{ github.event.inputs.RELEASE_NAME }}
+          draft: true
+
       - name: Update the ${{ env.TAG_VERSION }} tag
         uses: actions/publish-action@v0.3.0
         with:
