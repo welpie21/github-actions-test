@@ -3,6 +3,9 @@ name: Publish
 on:
   workflow_dispatch:
     inputs:
+      RELEASE_NAME:
+        description: 'Name of the release'
+        required: true
       TAG_VERSION:
         description: 'Version of the tag'
         required: true
@@ -25,12 +28,12 @@ jobs:
     permissions: 
       contents: write
     steps:
-      - name: Add the ${{ env.TAG_VERSION }} tag to the repository
-        uses: rickstaa/action-create-tag@v1
-        with:
-          tag: ${{ env.TAG_VERSION }}
-          tag_exists_error: true
-      - name: Update the ${{ env.TAG_NAME }} tag
+      - name: Update the ${{ env.TAG_VERSION }} tag
         uses: actions/publish-action@v0.3.0
         with:
           source-tag: ${{ env.TAG_VERSION }}
+      - name: Create a release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ env.TAG_VERSION }}
+          release_name: Release ${{ env.TAG_VERSION }}
