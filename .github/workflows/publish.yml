@@ -28,12 +28,12 @@ jobs:
     permissions: 
       contents: write
     steps:
-      - name: Update the ${{ env.TAG_VERSION }} tag
-        uses: actions/publish-action@v0.3.0
-        with:
-          source-tag: ${{ env.TAG_VERSION }}
       - name: Create a release
         uses: actions/create-release@v1
         with:
           tag_name: ${{ env.TAG_VERSION }}
           release_name: Release ${{ env.TAG_VERSION }}
+      - name: Update the ${{ env.TAG_VERSION }} tag
+        uses: actions/publish-action@v0.3.0
+        with:
+          source-tag: ${{ env.TAG_VERSION }}
