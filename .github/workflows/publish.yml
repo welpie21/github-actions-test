@@ -6,9 +6,16 @@ on:
       TAG_VERSION:
         description: 'Version of the tag'
         required: true
-      RELEASE_NAME:
-        description: 'Name of the release'
-        required: true
+      RELEASE_MESSAGE:
+        description: 'Message for the release'
+        required: false
+      RELEASE_TYPE:
+        description: 'Type of the release'
+        required: false
+        type: choice
+        options:
+          - draft
+          - release
 
 env:
   TAG_VERSION: ${{ github.event.inputs.TAG_VERSION }}
@@ -32,8 +39,9 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ env.TAG_VERSION }}
-          name: ${{ github.event.inputs.RELEASE_NAME }}
-          draft: false
+          name: Release ${{ github.event.inputs.TAG_VERSION }}
+          draft: ${{ github.event.inputs.RELEASE_TYPE == 'draft' }}
+          body: ${{ github.event.inputs.RELEASE_MESSAGE }}
 
       - name: Update the ${{ env.TAG_VERSION }} tag
         uses: actions/publish-action@v0.3.0
