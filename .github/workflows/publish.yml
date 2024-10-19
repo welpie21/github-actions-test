@@ -3,11 +3,11 @@ name: Publish
 on:
   workflow_dispatch:
     inputs:
-      RELEASE_NAME:
-        description: 'Name of the release'
-        required: true
       TAG_VERSION:
         description: 'Version of the tag'
+        required: true
+      RELEASE_NAME:
+        description: 'Name of the release'
         required: true
 
 env:
@@ -33,7 +33,7 @@ jobs:
         with:
           tag: ${{ env.TAG_VERSION }}
           name: ${{ github.event.inputs.RELEASE_NAME }}
-          draft: true
+          draft: false
 
       - name: Update the ${{ env.TAG_VERSION }} tag
         uses: actions/publish-action@v0.3.0
